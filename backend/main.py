@@ -17,6 +17,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -51,7 +52,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://127.0.0.1:5173"
+        "http://127.0.0.1:5173",
+        "https://cloudkit-production.up.railway.app",  # ← TAMBAHKAN INI
     ],
     allow_credentials=True,
     allow_methods=["*"],
