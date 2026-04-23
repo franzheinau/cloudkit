@@ -1,7 +1,9 @@
 fastapi
 uvicorn
 gunicorn
-pymongo
-flask-cors
 httpx
 python-jose[cryptography]
+passlib[bcrypt]
+pydantic
+python-dotenv
+pymongo
