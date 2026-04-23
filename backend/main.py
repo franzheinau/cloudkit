@@ -457,3 +457,7 @@ async def rename_file(
 def health():
 
     return {"status":"ok"}
+
+print("MONGO_URL:", MONGO_URL)
+client = MongoClient(MONGO_URL)
+print("CONNECTED")
