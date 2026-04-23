@@ -1,4 +1,6 @@
-flask
+fastapi
+uvicorn
 gunicorn
 pymongo
+flask-cors
 httpx
