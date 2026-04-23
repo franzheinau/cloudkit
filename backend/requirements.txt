@@ -4,3 +4,4 @@ gunicorn
 pymongo
 flask-cors
 httpx
+python-jose[cryptography]
