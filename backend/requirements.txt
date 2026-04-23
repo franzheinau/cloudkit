@@ -7,3 +7,4 @@ passlib[bcrypt]
 pydantic
 python-dotenv
 pymongo
+python-multipart
