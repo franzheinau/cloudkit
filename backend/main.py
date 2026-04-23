@@ -31,7 +31,7 @@ JWT_ALGORITHM    = "HS256"
 JWT_EXPIRE_HOURS = int(os.getenv("JWT_EXPIRE_HOURS", 24))
 
 MONGO_URL = os.getenv("MONGO_URL")
-DB_NAME   = os.getenv("DB_NAME", "cloudkit")
+DB_NAME   = os.getenv("DB_NAME", "cloudkitt")
 
 IMAGEKIT_API_BASE = "https://api.imagekit.io/v1"
 IK_AUTH_HEADER = base64.b64encode(f"{IMAGEKIT_PRIVATE_KEY}:".encode()).decode()
