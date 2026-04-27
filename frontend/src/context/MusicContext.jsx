@@ -3,7 +3,7 @@ import { useMusic } from "../hooks/useMusic";
 
 const MusicCtx = createContext(null);
 
-const MUSIC_URL = "/Pixel.mp3"; // ← ganti ini
+const MUSIC_URL = "/Pixel5.mp3"; // ← ganti ini
 
 export function MusicProvider({ children }) {
   const music = useMusic(MUSIC_URL, { volume: 0.35 });
