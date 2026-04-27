@@ -397,10 +397,7 @@
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(180deg,
-    #2e1065 0%, #4c1d95 30%, #7c3aed 60%,
-    #9333ea 80%, #c026d3 100%
-  );
+  background: #1a0a2e;
   font-family: var(--px-font);
   color: var(--px-white);
   image-rendering: pixelated;
@@ -416,6 +413,7 @@
   display: flex;
   flex-direction: column;
   z-index: 5;
+  position: relative; /* ← tambah ini */
   backdrop-filter: blur(4px);
 }
 
@@ -528,7 +526,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 5;
+  position: relative; /* ← tambah ini */
+  z-index: 2;  
 }
 
 .px-topbar {
@@ -1046,6 +1045,292 @@
   .px-hp-label,
   .px-hp-bg{
     display:none !important;
+  }
+  
+}
+
+  .px-logout-btn{
+    padding:6px 10px !important;
+    border:2px solid var(--px-gray) !important;
+    background:var(--px-deep) !important;
+    color:var(--px-gray) !important;
+    width:auto !important;
+  }
+
+  /* ── PIXEL SCENE ── */
+  .px-scene {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    image-rendering: pixelated;
+  }
+
+  .px-sky {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        #1a0a2e 0%,
+        #4a0d6e 25%,
+        #8b1a6b 45%,
+        #c03050 55%,
+        #e05030 65%,
+        #f07020 72%,
+        #f8b040 80%,
+        #f8b040 100%
+      );
+  }
+
+  .px-sun {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: #ffd060;
+    box-shadow:
+      0 0 0 8px #ffe898,
+      0 0 0 16px rgba(255,224,120,0.4),
+      0 0 0 32px rgba(255,200,80,0.15);
+    image-rendering: pixelated;
+  }
+
+  .px-mountains {
+    position: absolute;
+    bottom: 18%;
+    left: 0;
+    width: 100%;
+    height: 200px;
+  }
+
+  .px-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 18%;
+    background: #0a1206;
+    border-top: 4px solid #1a2a0a;
+  }
+
+  .px-road {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: #141414;
+    border-top: 3px solid #f0c020;
+    border-bottom: 3px solid #f0c020;
+    overflow: hidden;
+  }
+
+  .px-road--top  { bottom: calc(18% + 28px); }
+  .px-road--bot  { bottom: calc(18%); }
+
+  .px-road-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      #e8e8e8 0px, #e8e8e8 30px,
+      transparent 30px, transparent 60px
+    );
+    transform: translateY(-50%);
+    opacity: 0.5;
+  }
+
+  /* ── Cars ── */
+  .px-car {
+    position: absolute;
+    image-rendering: pixelated;
+  }
+
+  .px-car--red {
+    bottom: calc(18% + 30px);
+    animation: px-driveRight 9s linear infinite;
+  }
+
+  .px-car--blue {
+    bottom: calc(18% + 2px);
+    animation: px-driveLeft 13s linear infinite;
+  }
+
+  @keyframes px-driveRight {
+    0%   { left: -100px; }
+    100% { left: 110%; }
+  }
+
+  @keyframes px-driveLeft {
+    0%   { right: -110px; }
+    100% { right: 110%; }
+  }
+
+  /* ── MOBILE RESPONSIVE ── */
+@media (max-width: 640px) {
+
+  /* Dashboard layout */
+  .px-dashboard {
+    flex-direction: column;
+  }
+
+  /* Sidebar jadi bottom navbar */
+  .px-sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    border-top: 3px solid var(--px-purple-l);
+    order: 999;
+    padding: 6px 12px;
+  }
+
+  .px-sidebar-logo {
+    display: none;
+  }
+
+  .px-sidebar-footer {
+    display: none;
+  }
+
+  .px-nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .px-nav-item {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    font-size: 9px;
+    padding: 8px 4px;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  .px-nav-item--active {
+    border-bottom: 3px solid var(--px-purple-l);
+    border-left: none;
+  }
+
+  /* Main content */
+  .px-main {
+    flex: 1;
+    overflow-y: auto;
+    order: 1;
+  }
+
+  /* Topbar */
+  .px-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 8px 12px;
+  }
+
+  .px-topbar-title {
+    font-size: 13px;
+  }
+
+  .px-topbar-controls {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .px-search-bar {
+    grid-column: 1 / -1;
+  }
+
+  .px-select {
+    width: 100%;
+    font-size: 9px;
+  }
+
+  /* File grid */
+  .px-file-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .px-file-card {
+    font-size: 10px;
+  }
+
+  .px-file-name {
+    font-size: 9px;
+  }
+
+  .px-file-meta {
+    font-size: 8px;
+  }
+
+  .px-file-actions {
+    gap: 4px;
+  }
+
+  .px-btn-sm {
+    font-size: 8px;
+    padding: 4px 6px;
+  }
+
+  /* Content padding */
+  .px-content {
+    padding: 10px;
+  }
+
+  /* Upload zone */
+  .px-drop-zone {
+    padding: 20px 12px;
+  }
+
+  .px-drop-text {
+    font-size: 11px;
+  }
+
+  .px-drop-sub {
+    font-size: 9px;
+  }
+
+  /* Stats grid */
+  .px-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Upload controls */
+  .px-upload-controls {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .px-upload-controls .px-btn {
+    flex: 1;
+    min-width: 100px;
+    font-size: 9px;
+  }
+
+  /* Scene — matiin di mobile biar tidak berat */
+  .px-scene {
+    display: none;
+  }
+
+  .px-dashboard {
+    background: linear-gradient(
+      180deg,
+      #2e1065 0%, #4c1d95 30%,
+      #7c3aed 60%, #9333ea 80%, #c026d3 100%
+    );
   }
 
 }

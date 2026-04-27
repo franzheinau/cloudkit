@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useAuth, API } from "../context/AuthContext";
 import { useUploadQueue } from "../hooks/useUploadQueue";
+import { useMusicCtx } from "../context/MusicContext";
+import PixelScene from "../components/PixelScene";
 import "../index.css";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -68,6 +70,7 @@ function MiniClouds() {
  
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 function Sidebar({ view, setView, user, logout }) {
+  const { muted, toggleMute } = useMusicCtx();
   return (
     <div className="px-sidebar">
       <div className="px-sidebar-logo">
@@ -100,12 +103,15 @@ function Sidebar({ view, setView, user, logout }) {
           HP {"█".repeat(Math.round(67 / 15))}{"░".repeat(7 - Math.round(67 / 15))} 67%
         </div>
         <div className="px-hp-bg"><div className="px-hp-fill" style={{ width:"67%" }} /></div>
+                <button className="px-btn-sm" onClick={toggleMute} style={{width:"100%", marginBottom:6}}>
+          {muted ? "🔇 MUSIK OFF" : "🎵 MUSIK ON"}
+        </button>
         <button className="px-logout-btn" onClick={logout}>⬛ KELUAR</button>
       </div>
     </div>
   );
 }
- 
+
 // ── Rename Modal ──────────────────────────────────────────────────────────────
 function RenameModal({ file, onConfirm, onCancel, loading }) {
   const [name, setName] = useState(file.name);
@@ -137,7 +143,7 @@ function RenameModal({ file, onConfirm, onCancel, loading }) {
  
 // ── Delete Modal ──────────────────────────────────────────────────────────────
 function DeleteModal({ file, onConfirm, onCancel, loading }) {
-  return (
+  return  (
     <div className="px-modal-overlay" onClick={e=>e.target===e.currentTarget&&onCancel()}>
       <div className="px-modal-box">
         <div className="px-corner px-corner--tl"/><div className="px-corner px-corner--tr"/>
@@ -308,7 +314,7 @@ export default function Dashboard() {
     >
       <div className="ls-dither" />
       <MiniClouds />
- 
+      <PixelScene />
       <Sidebar view={view} setView={setView} user={user} logout={logout} />
  
       <div className="px-main">
@@ -426,3 +432,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
